@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://ckfpui7i5bgpn"]
+
+[ext_resource type="Texture2D" uid="uid://c8tnvlrvp51r7" path="res://Sprites/Player/Wizard Idle Animation-1.png.png" id="1_480cn"]
+[ext_resource type="Script" path="res://Scenes/player.gd" id="1_itlvw"]
+[ext_resource type="Texture2D" uid="uid://dnglis73g8ohb" path="res://Sprites/Player/Wizard Idle Animation-2.png (1).png" id="2_s17oj"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jqi0f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_480cn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_s17oj")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vnc5w"]
+radius = 15.0
+height = 76.0
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_itlvw")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(-1.90735e-06, 0)
+rotation = 3.14159
+scale = Vector2(-0.11159, -0.11159)
+sprite_frames = SubResource("SpriteFrames_jqi0f")
+animation = &"Idle"
+autoplay = "Idle"
+frame_progress = 0.753693
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_vnc5w")
