@@ -16,6 +16,7 @@ func _physics_process(delta):
 	if direction:
 		velocity = velocity.move_toward(direction * SPEED, ACCELERATION)
 		last_direction = direction
+		
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION)
 

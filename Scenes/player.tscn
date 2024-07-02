@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://ckfpui7i5bgpn"]
+[gd_scene load_steps=8 format=3 uid="uid://ckfpui7i5bgpn"]
 
 [ext_resource type="Texture2D" uid="uid://c8tnvlrvp51r7" path="res://Sprites/Player/Wizard Idle Animation-1.png.png" id="1_480cn"]
 [ext_resource type="Script" path="res://Scenes/player.gd" id="1_itlvw"]
 [ext_resource type="Texture2D" uid="uid://dnglis73g8ohb" path="res://Sprites/Player/Wizard Idle Animation-2.png (1).png" id="2_s17oj"]
+[ext_resource type="PackedScene" uid="uid://dd2gwiutghnle" path="res://Scenes/enemy_orc.tscn" id="4_w8xxe"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_jqi0f"]
 animations = [{
@@ -22,7 +23,11 @@ animations = [{
 radius = 15.0
 height = 76.0
 
-[node name="Player" type="CharacterBody2D"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dwsat"]
+radius = 15.0
+height = 76.0
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_itlvw")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
@@ -36,3 +41,13 @@ frame_progress = 0.753693
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_vnc5w")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CapsuleShape2D_dwsat")
+
+[node name="EnemyOrc" parent="." instance=ExtResource("4_w8xxe")]
+position = Vector2(241, -40)
+
+[editable path="EnemyOrc"]
