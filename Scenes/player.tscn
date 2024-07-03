@@ -2,8 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://c8tnvlrvp51r7" path="res://Sprites/Player/Wizard Idle Animation-1.png.png" id="1_480cn"]
 [ext_resource type="Script" path="res://Scenes/player.gd" id="1_itlvw"]
+[ext_resource type="PackedScene" uid="uid://jsgyoap55iyr" path="res://Scenes/fireball.tscn" id="2_b4gj0"]
 [ext_resource type="Texture2D" uid="uid://dnglis73g8ohb" path="res://Sprites/Player/Wizard Idle Animation-2.png (1).png" id="2_s17oj"]
-[ext_resource type="PackedScene" uid="uid://dd2gwiutghnle" path="res://Scenes/enemy_orc.tscn" id="4_w8xxe"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_jqi0f"]
 animations = [{
@@ -29,6 +29,7 @@ height = 76.0
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_itlvw")
+Fireball = ExtResource("2_b4gj0")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(-1.90735e-06, 0)
@@ -47,7 +48,5 @@ shape = SubResource("CapsuleShape2D_vnc5w")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CapsuleShape2D_dwsat")
 
-[node name="EnemyOrc" parent="." instance=ExtResource("4_w8xxe")]
-position = Vector2(241, -40)
-
-[editable path="EnemyOrc"]
+[node name="Hands" type="Marker2D" parent="."]
+position = Vector2(14, 17)

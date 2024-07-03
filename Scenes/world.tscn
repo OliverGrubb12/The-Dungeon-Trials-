@@ -251,4 +251,3 @@ autostart = true
 [connection signal="timeout" from="Camera/EnemySpawners/SpawnTimer" to="Camera/EnemySpawners" method="_on_spawn_timer_timeout"]
 
 [editable path="Player"]
-[editable path="Player/EnemyOrc"]
