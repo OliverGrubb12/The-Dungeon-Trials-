@@ -36,4 +36,8 @@ func fireball():
 	var fireball = Fireball.instantiate()
 	add_child(fireball)
 	fireball.global_position = hands.global_position
-	var target = get 
+	var target  = get_global_mouse_position()
+	var direction_to_mouse = fireball.global_position.direction_to(target).normalized()
+	fireball.set_direction(direction_to_mouse)
+	fireball.rotate(target.angle())
+	
