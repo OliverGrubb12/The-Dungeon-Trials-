@@ -1,20 +1,24 @@
 extends Area2D
-@onready var fireball = $Fireball
+@onready var fireball = $"."
 @export var SPEED = 10
-var direction := Vector2.ZERO
+var direction = Vector2.ZERO
+@onready var fireball_anim = $FireballAnim
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
-	pass # Replace with function body.
+	await fireball_anim.animation_finished
+	queue_free()
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta: float):
+func _physics_process(_delta: float):
 	if direction != Vector2.ZERO:
-		var velocity = direction * SPEED
-	#translate(Vector2.RIGHT.rotated(rotation) * SPEED * delta)
+		var velocity = direction * WeaponFireball.fireball_speed
 		global_position += velocity
 
 func set_direction(direction: Vector2):
 	self.direction = direction
-	
+
+func _on_body_entered(body):
+	if body.is_in_group("Enemy") or body.is_in_group("Boss") and body.has_method("take_damage"):
+		body.take_damage(WeaponFireball.fireball_damage)
+		queue_free()
+

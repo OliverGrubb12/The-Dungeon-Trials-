@@ -1,10 +1,10 @@
 extends Node2D
 @onready var spawn_points = $SpawnPoints.get_children()
 @onready var spawn_timer = $SpawnTimer
-
 @onready var world = get_node("/root/World")
 @onready var camera = $".."
 const ENEMY_ORC = preload("res://Scenes/enemy_orc.tscn")
+
 
 func spawn_enemy():
 	var enemy = ENEMY_ORC.instantiate()
@@ -14,4 +14,5 @@ func spawn_enemy():
 
 
 func _on_spawn_timer_timeout():
-	spawn_enemy()
+		spawn_enemy()
+

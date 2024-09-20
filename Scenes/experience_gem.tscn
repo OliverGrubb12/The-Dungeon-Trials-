@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dpmvsoq63733a"]
+
+[ext_resource type="Texture2D" uid="uid://c3l5nkng23fpu" path="res://Sprites/Items/oryx_16bit_fantasy_items_90.png" id="1_6rdjb"]
+[ext_resource type="Script" path="res://Scenes/experience_gem.gd" id="1_aptrf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s46i2"]
+radius = 7.0
+
+[node name="ExperienceGem" type="Area2D" groups=["Pickup"]]
+script = ExtResource("1_aptrf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_s46i2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_6rdjb")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

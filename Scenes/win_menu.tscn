@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=3 uid="uid://ds2irmymw8vbi"]
+
+[ext_resource type="Script" path="res://Scenes/Win Menu.gd" id="1_ln1bk"]
+[ext_resource type="Texture2D" uid="uid://e2d8k6ri1k5m" path="res://Sprites/Tilemap/Win Screen.png" id="2_pu0sl"]
+[ext_resource type="Texture2D" uid="uid://c7jsx7tb4muhi" path="res://Sprites/Abilities/Attacks/FB001.png" id="3_41xdf"]
+
+[node name="Win Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -2.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ln1bk")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(970, 365)
+scale = Vector2(2.55401, 2.55401)
+texture = ExtResource("2_pu0sl")
+
+[node name="Fireball" type="Sprite2D" parent="."]
+position = Vector2(621, 315)
+rotation = 0.287979
+scale = Vector2(3.875, 3.875)
+texture = ExtResource("3_41xdf")
+
+[node name="Fireball2" type="Sprite2D" parent="."]
+position = Vector2(1363, 259)
+rotation = 2.68606
+scale = Vector2(3.90625, 3.90625)
+texture = ExtResource("3_41xdf")
+
+[node name="MainMenuButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.399896
+anchor_top = 0.768372
+anchor_right = 0.604369
+anchor_bottom = 0.912116
+offset_right = -0.180002
+offset_bottom = 0.475
+text = "Main Menu"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="MainMenuButton" to="." method="_on_main_menu_button_pressed"]

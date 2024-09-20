@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://de4g0xnq7tow2"]
+
+[ext_resource type="AudioStream" uid="uid://qcgq8skdwb47" path="res://Music/SFX/ermos-177053.mp3" id="1_jbc2t"]
+[ext_resource type="Script" path="res://Scenes/game_music.gd" id="2_6o083"]
+[ext_resource type="AudioStream" uid="uid://bqq0vemncfhgn" path="res://Music/SFX/battle-of-the-dragons-8037.mp3" id="3_nlvx7"]
+
+[node name="Game Music" type="AudioStreamPlayer"]
+stream = ExtResource("1_jbc2t")
+autoplay = true
+script = ExtResource("2_6o083")
+
+[node name="Boss Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_nlvx7")
+volume_db = 5.0

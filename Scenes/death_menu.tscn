@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://c2i42puxn31ui"]
+
+[ext_resource type="Texture2D" uid="uid://dwygocpprge2l" path="res://Sprites/Tilemap/Death Screen.png" id="1_ggvgv"]
+[ext_resource type="Script" path="res://Scenes/death_menu.gd" id="1_i45ga"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2gb64"]
+
+[node name="Death Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_i45ga")
+
+[node name="Background" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_2gb64")
+position = Vector2(957, 540)
+scale = Vector2(1.02315, 1.02315)
+texture = ExtResource("1_ggvgv")
+
+[node name="MainMenuButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 16.987
+anchor_top = 21.845
+anchor_right = 29.975
+anchor_bottom = 24.084
+offset_left = 1.52002
+offset_top = 0.199951
+offset_bottom = 1.64001
+text = "Main Menu"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="MainMenuButton" to="." method="_on_button_pressed"]

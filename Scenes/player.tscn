@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://ckfpui7i5bgpn"]
+[gd_scene load_steps=15 format=3 uid="uid://ckfpui7i5bgpn"]
 
 [ext_resource type="Texture2D" uid="uid://c8tnvlrvp51r7" path="res://Sprites/Player/Wizard Idle Animation-1.png.png" id="1_480cn"]
 [ext_resource type="Script" path="res://Scenes/player.gd" id="1_itlvw"]
 [ext_resource type="PackedScene" uid="uid://jsgyoap55iyr" path="res://Scenes/fireball.tscn" id="2_b4gj0"]
 [ext_resource type="Texture2D" uid="uid://dnglis73g8ohb" path="res://Sprites/Player/Wizard Idle Animation-2.png (1).png" id="2_s17oj"]
+[ext_resource type="Script" path="res://Scenes/UI.gd" id="5_24iws"]
+[ext_resource type="AudioStream" uid="uid://baeo6butxn27a" path="res://Music/SFX/488059-Fire-Flame-torch-natural-fireball-woosh-single-fly_by-01.wav" id="6_5q36v"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_jqi0f"]
 animations = [{
@@ -21,20 +23,39 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vnc5w"]
 radius = 15.0
-height = 76.0
+height = 72.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dwsat"]
 radius = 15.0
-height = 76.0
+height = 72.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6dhwa"]
+radius = 105.076
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jcqu4"]
+bg_color = Color(0.6, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3ot5l"]
+bg_color = Color(0, 0.6, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_mmk2k"]
+font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_3hmug"]
+font_size = 31
+shadow_color = Color(0.351563, 0.351563, 0.351563, 1)
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_itlvw")
 Fireball = ExtResource("2_b4gj0")
 
-[node name="Sprite" type="AnimatedSprite2D" parent="."]
-position = Vector2(-1.90735e-06, 0)
+[node name="ShootingTimer" type="Timer" parent="."]
+wait_time = 0.6
+autostart = true
+
+[node name="PlayerAnimations" type="AnimatedSprite2D" parent="."]
 rotation = 3.14159
-scale = Vector2(-0.11159, -0.11159)
+scale = Vector2(-0.0966626, -0.0966626)
 sprite_frames = SubResource("SpriteFrames_jqi0f")
 animation = &"Idle"
 autoplay = "Idle"
@@ -49,4 +70,152 @@ shape = SubResource("CapsuleShape2D_vnc5w")
 shape = SubResource("CapsuleShape2D_dwsat")
 
 [node name="Hands" type="Marker2D" parent="."]
-position = Vector2(0, 17)
+position = Vector2(0, 9)
+
+[node name="PickupZone" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupZone"]
+shape = SubResource("CircleShape2D_6dhwa")
+
+[node name="UI" type="CanvasLayer" parent="."]
+script = ExtResource("5_24iws")
+
+[node name="UI" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Health" type="ProgressBar" parent="UI/UI"]
+layout_mode = 0
+offset_top = 1057.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_jcqu4")
+theme_override_styles/fill = SubResource("StyleBoxFlat_3ot5l")
+value = 100.0
+
+[node name="Experience" type="ProgressBar" parent="UI/UI"]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 23.0
+grow_horizontal = 2
+
+[node name="LevelUpNotice" type="PanelContainer" parent="UI/UI"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -70.0
+offset_right = 150.0
+offset_bottom = 70.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/UI/LevelUpNotice"]
+custom_minimum_size = Vector2(300, 140)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/UI/LevelUpNotice/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="HealPlayer" type="Button" parent="UI/UI/LevelUpNotice/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Heal Player (+20%)"
+
+[node name="LevelUpSpeed" type="Button" parent="UI/UI/LevelUpNotice/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Level Up Player Speed"
+
+[node name="LevelUpFireball" type="Button" parent="UI/UI/LevelUpNotice/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Level Up Fireball"
+
+[node name="Label" type="Label" parent="UI/UI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.00625
+anchor_top = 0.0342593
+anchor_right = 0.198083
+anchor_bottom = 0.0691481
+offset_right = -0.320004
+offset_bottom = 0.319998
+text = "Press ESC Key to bring up Pause Menu"
+label_settings = SubResource("LabelSettings_mmk2k")
+metadata/_edit_use_anchors_ = true
+
+[node name="PauseMenu" type="Control" parent="UI"]
+visible = false
+layout_mode = 3
+anchor_left = 0.225542
+anchor_top = 0.287556
+anchor_right = 0.753146
+anchor_bottom = 0.712259
+offset_left = 29.96
+offset_top = -1.56003
+offset_right = 19.96
+offset_bottom = -3.24005
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="PauseInstructions" type="Label" parent="UI/PauseMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.137
+anchor_top = -0.352
+anchor_right = 0.874
+anchor_bottom = 0.322
+offset_left = -0.410965
+offset_top = -0.136276
+offset_right = 0.378296
+offset_bottom = -0.153748
+text = "Press the 'Escape (Esc)' Key to Resume"
+label_settings = SubResource("LabelSettings_3hmug")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MainMenuButton" type="Button" parent="UI/PauseMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.334984
+anchor_top = 0.407161
+anchor_right = 0.646984
+anchor_bottom = 0.628161
+offset_left = 0.0101013
+offset_top = -0.0727692
+offset_right = 0.0742188
+offset_bottom = -0.0696106
+grow_horizontal = 2
+grow_vertical = 2
+text = "Main Menu"
+metadata/_edit_use_anchors_ = true
+
+[node name="FireballSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_5q36v")
+
+[connection signal="timeout" from="ShootingTimer" to="." method="_on_shooting_timer_timeout"]
+[connection signal="area_entered" from="PickupZone" to="." method="_on_pickup_zone_area_entered"]
+[connection signal="visibility_changed" from="UI/UI/LevelUpNotice" to="UI" method="_on_level_up_notice_visibility_changed"]
+[connection signal="pressed" from="UI/UI/LevelUpNotice/MarginContainer/VBoxContainer/HealPlayer" to="UI" method="_on_heal_player_pressed"]
+[connection signal="pressed" from="UI/UI/LevelUpNotice/MarginContainer/VBoxContainer/LevelUpSpeed" to="UI" method="_on_level_up_speed_pressed"]
+[connection signal="pressed" from="UI/UI/LevelUpNotice/MarginContainer/VBoxContainer/LevelUpFireball" to="UI" method="_on_level_up_fireball_pressed"]
+[connection signal="pressed" from="UI/PauseMenu/MainMenuButton" to="." method="_on_main_menu_button_pressed"]

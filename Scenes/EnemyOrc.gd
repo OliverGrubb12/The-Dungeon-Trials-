@@ -1,20 +1,62 @@
 extends CharacterBody2D
 
-const SPEED = 100.0
+var SPEED = 100.0
 const JUMP_VELOCITY = -400
 @onready var player = get_tree().get_first_node_in_group("Player")
-@onready var enemy_sprite = $EnemySprite
+@onready var anim = $EnemySprite
+@export var health = 10
+@export var enemy_damage = 10
+@onready var damage_timer = $Hurtbox/DamageTimer
+const EXPERIENCE_GEM = preload("res://Scenes/experience_gem.tscn")
 
-func _physics_process(delta):
+func _ready():
+	if PlayerStats.player_level >= 3:
+		enemy_damage = 15
+		SPEED = 125
+	if PlayerStats.player_level >= 7:
+		enemy_damage = 20
+		SPEED = 150
+	if PlayerStats.player_level >= 10:
+		enemy_damage = 25
+		SPEED = 175
+	if PlayerStats.player_level >= 20:
+		enemy_damage = 34
+		SPEED = 200
+
+
+func check_collisions():
+	if not damage_timer.is_stopped():
+		return
+	var collisions = $Hurtbox.get_overlapping_bodies()
+	if collisions:
+		for collision in collisions:
+			if collision.is_in_group("Player") and damage_timer.is_stopped():
+				PlayerStats.damage_player(enemy_damage)
+				damage_timer.start()
+
+
+func _physics_process(_delta):
 	var direction_to_player = global_position.direction_to(player.global_position)
 	velocity = direction_to_player * SPEED
 	
 	if velocity.x > 0:
-			enemy_sprite.flip_h = false
+			anim.flip_h = false
 	else :
-			enemy_sprite.flip_h = true
-	
-	
-	
+			anim.flip_h = true
+			
+	check_collisions()
 	move_and_slide()
 
+func take_damage(dmg):
+	health -= dmg
+	if health <= 0:
+		anim.play("Death")
+		SPEED = 0
+		enemy_damage = 0
+		await anim.animation_finished
+		var new_gem = EXPERIENCE_GEM.instantiate()
+		new_gem.global_position = global_position
+		add_sibling(new_gem)
+		queue_free()
+		
+		

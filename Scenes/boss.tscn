@@ -1,0 +1,153 @@
+[gd_scene load_steps=20 format=3 uid="uid://cnri864u6cdab"]
+
+[ext_resource type="Script" path="res://Scenes/boss.gd" id="1_4wdpg"]
+[ext_resource type="Texture2D" uid="uid://c8akffosd5ogs" path="res://Sprites/Enemies/Idle.png" id="1_8tngb"]
+[ext_resource type="Texture2D" uid="uid://b43abwnjm2uef" path="res://Sprites/Enemies/Death.png" id="2_3lh3h"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iko1u"]
+atlas = ExtResource("2_3lh3h")
+region = Rect2(0, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8a5lh"]
+atlas = ExtResource("2_3lh3h")
+region = Rect2(150, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ongmn"]
+atlas = ExtResource("2_3lh3h")
+region = Rect2(300, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u1xef"]
+atlas = ExtResource("2_3lh3h")
+region = Rect2(450, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gtlyp"]
+atlas = ExtResource("2_3lh3h")
+region = Rect2(600, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hquw4"]
+atlas = ExtResource("1_8tngb")
+region = Rect2(0, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h4ig0"]
+atlas = ExtResource("1_8tngb")
+region = Rect2(150, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8087x"]
+atlas = ExtResource("1_8tngb")
+region = Rect2(300, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uk8o5"]
+atlas = ExtResource("1_8tngb")
+region = Rect2(450, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nfmvg"]
+atlas = ExtResource("1_8tngb")
+region = Rect2(600, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5a3k6"]
+atlas = ExtResource("1_8tngb")
+region = Rect2(750, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e3dha"]
+atlas = ExtResource("1_8tngb")
+region = Rect2(900, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_70l2n"]
+atlas = ExtResource("1_8tngb")
+region = Rect2(1050, 0, 150, 150)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u1x1d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iko1u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8a5lh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ongmn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u1xef")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gtlyp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gtlyp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gtlyp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gtlyp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gtlyp")
+}],
+"loop": false,
+"name": &"Death",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hquw4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h4ig0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8087x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uk8o5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nfmvg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5a3k6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e3dha")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_70l2n")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h84ti"]
+radius = 46.0
+height = 166.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_odtmr"]
+radius = 46.0
+height = 166.0
+
+[node name="Boss" type="CharacterBody2D" groups=["Boss"]]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_4wdpg")
+
+[node name="BossSprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(3.08667, 3.08667)
+sprite_frames = SubResource("SpriteFrames_u1x1d")
+animation = &"Death"
+autoplay = "Idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_h84ti")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CapsuleShape2D_odtmr")
+
+[node name="BossDamageTimer" type="Timer" parent="Hurtbox"]
+wait_time = 0.4
+one_shot = true

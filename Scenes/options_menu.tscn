@@ -1,0 +1,88 @@
+[gd_scene load_steps=5 format=3 uid="uid://btlgn6gxsm0bl"]
+
+[ext_resource type="Script" path="res://Scenes/options_menu.gd" id="1_k5r3g"]
+[ext_resource type="Texture2D" uid="uid://mp2bgtyabmk4" path="res://Sprites/Tilemap/Menu Backing Tiles-1.png.png" id="1_ms1jw"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0xchm"]
+font_size = 75
+font_color = Color(0.758192, 0.758192, 0.758191, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_1ew7v"]
+font_size = 38
+font_color = Color(0.758192, 0.758192, 0.758191, 1)
+
+[node name="Options Menu" type="Control"]
+layout_mode = 3
+anchor_right = 0.988
+anchor_bottom = 0.987
+offset_right = 0.039917
+offset_bottom = 0.039917
+script = ExtResource("1_k5r3g")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+scale = Vector2(7.68, 7.01299)
+texture = ExtResource("1_ms1jw")
+
+[node name="OptionsTitle" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.33
+anchor_top = 0.066
+anchor_right = 0.69
+anchor_bottom = 0.263
+offset_left = -0.0100098
+offset_top = -0.356003
+offset_right = -1.93005
+offset_bottom = 3.642
+text = "Options"
+label_settings = SubResource("LabelSettings_0xchm")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Controls" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0880337
+anchor_top = 0.330206
+anchor_right = 0.370643
+anchor_bottom = 0.868381
+offset_top = -2.0
+offset_right = 2.89117
+offset_bottom = 1.30548
+text = "Controls:
+
+WASD - Movement
+Move Mouse - Aim
+Left Click - Shoot Fireball
+Escape - Pause Game"
+label_settings = SubResource("LabelSettings_1ew7v")
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="MainMenuButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0548234
+anchor_top = 0.0956848
+anchor_right = 0.21771
+anchor_bottom = 0.193004
+offset_right = -0.996002
+offset_bottom = 0.257996
+text = "Main Menu"
+metadata/_edit_use_anchors_ = true
+
+[node name="ToggleMusicButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.673168
+anchor_top = 0.371482
+anchor_right = 0.814227
+anchor_bottom = 0.48361
+offset_right = 0.412
+offset_bottom = -0.528
+text = "Toggle Music"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="MainMenuButton" to="." method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="ToggleMusicButton" to="." method="_on_toggle_music_button_pressed"]

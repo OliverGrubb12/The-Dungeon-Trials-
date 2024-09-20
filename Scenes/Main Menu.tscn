@@ -1,0 +1,60 @@
+[gd_scene load_steps=7 format=3 uid="uid://c73mwfwmr3tg2"]
+
+[ext_resource type="Script" path="res://Scenes/Main Menu.gd" id="1_a680l"]
+[ext_resource type="PackedScene" uid="uid://de2w6b04i5vpi" path="res://Scenes/fade.tscn" id="2_5tibu"]
+[ext_resource type="Texture2D" uid="uid://wue2mxdbxkv" path="res://Sprites/Tilemap/The Dungeon Trials Menu Screen-1.png.png" id="2_5v01g"]
+[ext_resource type="Texture2D" uid="uid://ca7hh5sm75uob" path="res://Sprites/Tilemap/New Piskel-1.png (2).png" id="2_mpr70"]
+[ext_resource type="Texture2D" uid="uid://1x4lxhmxj0rm" path="res://Sprites/Tilemap/New Piskel-1.png (1).png" id="3_d1jbl"]
+[ext_resource type="Texture2D" uid="uid://bbdmfv1jw7a00" path="res://Sprites/Tilemap/New Piskel-1.png (3).png" id="4_wsery"]
+
+[node name="Main Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_a680l")
+
+[node name="MenuBackground" type="Sprite2D" parent="."]
+position = Vector2(959.5, 538.5)
+scale = Vector2(7.748, 7.12338)
+texture = ExtResource("2_5v01g")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 2.175
+anchor_top = 11.8
+anchor_right = 26.925
+anchor_bottom = 24.025
+offset_left = -8.0
+offset_top = -7.0
+offset_right = 8.0
+offset_bottom = 0.999878
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 24
+metadata/_edit_use_anchors_ = true
+
+[node name="PlayButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 0
+icon = ExtResource("2_mpr70")
+
+[node name="OptionsButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 0
+icon = ExtResource("3_d1jbl")
+
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 0
+icon = ExtResource("4_wsery")
+
+[node name="Fade" parent="." instance=ExtResource("2_5tibu")]
+
+[connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

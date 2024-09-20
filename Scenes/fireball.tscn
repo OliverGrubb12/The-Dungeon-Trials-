@@ -24,21 +24,116 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("6_p1spc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_8vqrv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_d53jd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_q10ym")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_654tm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_p1spc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_8vqrv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_d53jd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_q10ym")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_654tm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_p1spc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_8vqrv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_d53jd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_q10ym")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_654tm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_p1spc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_8vqrv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_d53jd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_q10ym")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_654tm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_p1spc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_8vqrv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_d53jd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_q10ym")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_654tm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_p1spc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_8vqrv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_d53jd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_q10ym")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_654tm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_p1spc")
 }],
-"loop": true,
-"name": &"default",
-"speed": 5.0
+"loop": false,
+"name": &"Shooting",
+"speed": 4.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_178at"]
 height = 20.0
 
 [node name="Fireball" type="Area2D"]
+collision_mask = 2
 script = ExtResource("1_cehlf")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="FireballAnim" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_a8yah")
+animation = &"Shooting"
+autoplay = "Shooting"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(11, -1)
 shape = SubResource("CapsuleShape2D_178at")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
