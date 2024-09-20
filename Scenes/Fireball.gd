@@ -21,4 +21,3 @@ func _on_body_entered(body):
 	if body.is_in_group("Enemy") or body.is_in_group("Boss") and body.has_method("take_damage"):
 		body.take_damage(WeaponFireball.fireball_damage)
 		queue_free()
-

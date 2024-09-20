@@ -15,4 +15,3 @@ func spawn_enemy():
 
 func _on_spawn_timer_timeout():
 		spawn_enemy()
-

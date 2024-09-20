@@ -10,4 +10,3 @@ func _on_toggle_music_button_pressed():
 	music = false
 	GameMusic.game_music.playing = !GameMusic.game_music.playing
 	
-

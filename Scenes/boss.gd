@@ -41,6 +41,3 @@ func check_collisions():
 			if collision.is_in_group("Player") and boss_damage_timer.is_stopped():
 				PlayerStats.damage_player(boss_damage)
 				boss_damage_timer.start()
-
-
-

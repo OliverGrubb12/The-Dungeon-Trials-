@@ -33,4 +33,3 @@ func fade_out(amount, times):
 	for i in range(times):
 		screen.modulate.a -= amount
 		await get_tree().create_timer(0.05).timeout
-

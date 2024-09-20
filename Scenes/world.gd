@@ -6,4 +6,3 @@ extends Node2D
 
 func _ready():
 	fade.fade_out(0.05,20)
-
