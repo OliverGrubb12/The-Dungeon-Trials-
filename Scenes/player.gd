@@ -16,14 +16,14 @@ var direction = Vector2.ZERO
 var last_direction = Vector2.ZERO
 var paused = false
 
-
+# This is the code which triggers the pause menu.
 func _process(_delta):
 	# Pause Game
 	if Input.is_action_just_pressed("Pause"):
 		pauseMenu()
 	
 
-
+# This is the code for the player movement and for the player sprite to flip depending on which direction they move.
 func _physics_process(_delta):
 	# Movement
 	direction = Input.get_vector("left", "right", "up", "down").normalized()
@@ -41,13 +41,13 @@ func _physics_process(_delta):
 	
 	move_and_slide()
 
-
+# This is the code which triggers the player to shoot a fireball
 func _unhandled_input(_event):
 	#Fireball Attack
 	if Input.is_action_just_pressed("Fireball") and is_ready:
 		fireball()
 
-
+# This is the code for the pause menu.
 func pauseMenu():
 	if paused:
 		pause_menu.hide()
@@ -58,7 +58,7 @@ func pauseMenu():
 		
 	paused = !paused
 
-
+# This is the code for the fireball. It has all the code for its direction, speed, sound, position and animation
 func fireball():
 	shooting_timer.wait_time = WeaponFireball.fireball_time
 	shooting_timer.start()
@@ -72,13 +72,13 @@ func fireball():
 	fireball_sound.play()
 	is_ready = false
 
-
+# This is the code for when the player picks up an experience orb.
 func _on_pickup_zone_area_entered(area):
 	if area.is_in_group("Pickup"):
 		if area.has_method("collect"):
 			area.collect()
 
-
+# This is the code for the button in the pause menu which takes you back to the main menu. It also resets the player's stats and the music.
 func _on_main_menu_button_pressed():
 	Engine.time_scale = 1
 	get_tree().change_scene_to_file("res://Scenes/Main Menu.tscn")
@@ -89,5 +89,6 @@ func _on_main_menu_button_pressed():
 		GameMusic.boss_music.playing = !GameMusic.boss_music.playing
 	GameMusic.game_music.play()
 
+# This is a bit of code relating to the shooting timer on the player.
 func _on_shooting_timer_timeout():
 	is_ready = true

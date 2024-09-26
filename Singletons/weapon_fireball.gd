@@ -8,6 +8,7 @@ var fireball_time = 0.6
 var fireball_knockback = 10
 var fireball_max_level = 6
 
+# This is the code for when the fireball levels up. it increases its damage, speed, time and level.
 func level_up_fireball():
 	fireball_level +=1
 	match fireball_level:

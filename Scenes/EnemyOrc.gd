@@ -9,6 +9,7 @@ const JUMP_VELOCITY = -400
 @onready var damage_timer = $Hurtbox/DamageTimer
 const EXPERIENCE_GEM = preload("res://Scenes/experience_gem.tscn")
 
+# This is the code which upgrades the enemy stats as the player levels up. It upgrades its damage and speed.
 func _ready():
 	if PlayerStats.player_level >= 3:
 		enemy_damage = 15
@@ -23,7 +24,7 @@ func _ready():
 		enemy_damage = 34
 		SPEED = 200
 
-
+# This is the code which checks if the player overlaps with the enemy and if it does then it damages the player.
 func check_collisions():
 	if not damage_timer.is_stopped():
 		return
@@ -34,7 +35,7 @@ func check_collisions():
 				PlayerStats.damage_player(enemy_damage)
 				damage_timer.start()
 
-
+# This is the code for the enemy movement and for flipping the enemy sprite depending on its direction.
 func _physics_process(_delta):
 	var direction_to_player = global_position.direction_to(player.global_position)
 	velocity = direction_to_player * SPEED
@@ -47,6 +48,7 @@ func _physics_process(_delta):
 	check_collisions()
 	move_and_slide()
 
+# This is the code for when the enemy takes damage. If its health is <= 0 then it will die and spawn an experience orb.
 func take_damage(dmg):
 	health -= dmg
 	if health <= 0:
